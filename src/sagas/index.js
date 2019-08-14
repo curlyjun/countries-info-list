@@ -9,7 +9,7 @@ import {
 axios.defaults.baseURL = 'https://restcountries.eu/rest/v2/all?fields=alpha2Code;capital;name;region;callingCodes';
 
 function loadCountriesInfoAPI() {
-  return axios.get('/');
+  return axios.get('');
 }
 
 function* loadCountriesInfo() {
