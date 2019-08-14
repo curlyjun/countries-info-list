@@ -7,6 +7,8 @@ export const LOAD_COUNTRIES_INFO_FAILURE = 'LOAD_COUNTRIES_INFO_FAILURE';
 export const OPEN_ADD_COUNTRY_MODAL = 'OPEN_ADD_COUNTRY_MODAL';
 export const CLOSE_ADD_COUNTRY_MODAL = 'CLOSE_ADD_COUNTRY_MODAL';
 
+export const ADD_COUNTRY_REQUEST = 'ADD_COUNTRY_REQUEST';
+
 const initialState = {
   isLoadingCountriesInfo: false,
   isVisibleAddCountryForm: false,
@@ -43,6 +45,11 @@ export default (state = initialState, action) => {
       }
       case CLOSE_ADD_COUNTRY_MODAL: {
         draft.isVisibleAddCountryForm = false;
+        break;
+      }
+      case ADD_COUNTRY_REQUEST: {
+        action.data.key = draft.list.length + 1;
+        draft.list.unshift(action.data);
         break;
       }
       default: {
