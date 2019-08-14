@@ -2,7 +2,7 @@ const path = require('path');
 const HtmlWebPackPlugin = require('html-webpack-plugin');
 
 module.exports = {
-  entry: './src/index.js',
+  entry: ['react-hot-loader/patch', './src/index.js'],
   output: {
     filename: 'bundle.js',
     path: path.resolve(__dirname + '/build'),
@@ -10,11 +10,9 @@ module.exports = {
   mode: 'none',
   resolve: {
     extensions: ['.js', '.jsx'],
-  },
-  devServer: {
-    contentBase: path.resolve('./build'),
-    index: 'index.html',
-    port: 9000,
+    alias: {
+      'react-dom': '@hot-loader/react-dom',
+    },
   },
   module: {
     rules: [

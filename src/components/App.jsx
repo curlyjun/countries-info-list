@@ -1,20 +1,9 @@
 import React from 'react';
-import styled from 'styled-components';
-import TestButton from './TestButton';
+import { hot } from 'react-hot-loader/root';
 import ListPage from '../containers/ListPage';
 
-const Wrapper = styled.div`
-  background: purple;
-`;
-
 const App = () => {
-  return (
-    <Wrapper>
-      <TestButton />
-      <a style={{ color: 'red' }}>123</a>
-      <ListPage />
-    </Wrapper>
-  );
+  return <ListPage />;
 };
 
-export default App;
+export default hot(App);
