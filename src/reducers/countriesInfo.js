@@ -13,11 +13,15 @@ export const DELETE_COUNTRY_REQUEST = 'DELETE_COUNTRY_REQUEST';
 
 export const INTEGRATED_SEARCH_REQUEST = 'INTEGRATED_SEARCH_REQUEST';
 
+export const SORT_BY_COLUMN = 'SORT_BY_COLUMN';
+
 const initialState = {
   isLoadingCountriesInfo: false,
   isVisibleAddCountryForm: false,
   loadItems: [],
   list: [],
+  sort: 0, // 0 : ascending, 1 : descending
+  sortBy: 'name',
   error: '',
 };
 
@@ -70,6 +74,52 @@ export default (state = initialState, action) => {
         draft.list = draft.loadItems.filter(item => {
           return reg.test(item.name) || reg.test(item.alpha2Code);
         });
+        break;
+      }
+      case SORT_BY_COLUMN: {
+        //처음엔 이름으로 오름차순 되어있음
+        //같으면 한 번 이상 누른 것
+        if (draft.sortBy === action.data) {
+          draft.sort = !draft.sort;
+
+          draft.sort //descending
+            ? draft.list.sort((a, b) => {
+                if (a[draft.sortBy] > b[draft.sortBy]) {
+                  return -1;
+                }
+                if (a[draft.sortBy] < b[draft.sortBy]) {
+                  return 1;
+                }
+
+                return 0;
+              })
+            : //ascending
+              draft.list.sort((a, b) => {
+                if (a[draft.sortBy] < b[draft.sortBy]) {
+                  return -1;
+                }
+                if (a[draft.sortBy] > b[draft.sortBy]) {
+                  return 1;
+                }
+
+                return 0;
+              });
+        } else {
+          draft.sortBy = action.data;
+          draft.sort = 0;
+
+          draft.list.sort((a, b) => {
+            if (a[draft.sortBy] < b[draft.sortBy]) {
+              return -1;
+            }
+            if (a[draft.sortBy] > b[draft.sortBy]) {
+              return 1;
+            }
+
+            return 0;
+          });
+        }
+
         break;
       }
       default: {
