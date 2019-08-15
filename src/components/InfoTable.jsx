@@ -1,54 +1,53 @@
 import React, { useCallback } from 'react';
-import { Table, Tag } from 'antd';
+import styled from 'styled-components';
 
 import { useSelector } from 'react-redux';
+import TableItem from './TableItem';
 
-const columns = [
-  {
-    title: '이름',
-    dataIndex: 'name',
-  },
-  {
-    title: '국가 전화번호',
-    dataIndex: 'callingCodes',
-    render: callingCodes => {
-      return (
-        <>
-          {callingCodes.map(code => (
-            <Tag color={'green'} key={code}>
-              {code}
-            </Tag>
-          ))}
-        </>
-      );
-    },
-    sorter: (a, b) => a - b,
-  },
-  {
-    title: '대륙',
-    dataIndex: 'region',
-  },
-  {
-    title: '수도',
-    dataIndex: 'capital',
-  },
-  {
-    title: '코드',
-    dataIndex: 'alpha2Code',
-  },
-];
+const MyTable = styled.table`
+  width: 100%;
+`;
 
 const InfoTable = () => {
   const { list, isLoadingCountriesInfo } = useSelector(state => state.countriesInfo);
 
+  const onClickTableHeader = useCallback(e => {
+    console.log(e.target.id);
+  }, []);
+
+  const onClickDelete = useCallback(key => {
+    console.log(key);
+  }, []);
   return (
-    <Table dataSource={list} loading={isLoadingCountriesInfo}>
-      <Table.Column title="이름" dataIndex="name" key="name" />
-      <Table.Column title="국가 전화번호" dataIndex="callingCodes" key="callingCodes" />
-      <Table.Column title="대륙" dataIndex="region" key="region" />
-      <Table.Column title="수도" dataIndex="capital" key="capital" />
-      <Table.Column title="코드" dataIndex="alpha2Code" key="alpha2Code" />
-    </Table>
+    <>
+      <MyTable>
+        <thead>
+          <tr>
+            <th onClick={onClickTableHeader} id="name">
+              이름
+            </th>
+            <th onClick={onClickTableHeader} id="callingCodes">
+              국가 전화번호
+            </th>
+            <th onClick={onClickTableHeader} id="region">
+              대륙
+            </th>
+            <th onClick={onClickTableHeader} id="capital">
+              수도
+            </th>
+            <th onClick={onClickTableHeader} id="alpha2Code">
+              코드
+            </th>
+            <th>-</th>
+          </tr>
+        </thead>
+        <tbody>
+          {list.map(item => (
+            <TableItem key={item.key} data={item} onClickDelete={onClickDelete} />
+          ))}
+        </tbody>
+      </MyTable>
+    </>
   );
 };
 
