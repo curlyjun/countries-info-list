@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
-import SearchInput from '../containers/SearchInput';
 import AddCountryButton from '../containers/AddCountryButton';
+import SearchBox from '../containers/SearchBox';
 
 const MyHeader = styled.header`
   width: 100%;
@@ -12,7 +12,7 @@ const MyHeader = styled.header`
 const Header = () => {
   return (
     <MyHeader>
-      <SearchInput />
+      <SearchBox />
       <AddCountryButton />
     </MyHeader>
   );

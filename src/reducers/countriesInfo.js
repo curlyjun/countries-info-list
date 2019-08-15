@@ -11,9 +11,12 @@ export const ADD_COUNTRY_REQUEST = 'ADD_COUNTRY_REQUEST';
 
 export const DELETE_COUNTRY_REQUEST = 'DELETE_COUNTRY_REQUEST';
 
+export const INTEGRATED_SEARCH_REQUEST = 'INTEGRATED_SEARCH_REQUEST';
+
 const initialState = {
   isLoadingCountriesInfo: false,
   isVisibleAddCountryForm: false,
+  loadItems: [],
   list: [],
   error: '',
 };
@@ -24,6 +27,7 @@ export default (state = initialState, action) => {
       case LOAD_COUNTRIES_INFO_REQUEST: {
         draft.isLoadingCountriesInfo = true;
         draft.list = [];
+        draft.loadItems = [];
         break;
       }
       case LOAD_COUNTRIES_INFO_SUCCESS: {
@@ -33,6 +37,7 @@ export default (state = initialState, action) => {
         });
         draft.isLoadingCountriesInfo = false;
         draft.list = newData;
+        draft.loadItems = newData;
         break;
       }
       case LOAD_COUNTRIES_INFO_FAILURE: {
@@ -52,10 +57,19 @@ export default (state = initialState, action) => {
       case ADD_COUNTRY_REQUEST: {
         action.data.key = draft.list.length + 1;
         draft.list.unshift(action.data);
+        draft.loadItems.unshift(action.data);
         break;
       }
       case DELETE_COUNTRY_REQUEST: {
         draft.list = draft.list.filter(item => item.key !== action.data);
+        draft.loadItems = draft.loadItems.filter(item => item.key !== action.data);
+        break;
+      }
+      case INTEGRATED_SEARCH_REQUEST: {
+        const reg = new RegExp(action.data, 'ig');
+        draft.list = draft.loadItems.filter(item => {
+          return reg.test(item.name) || reg.test(item.alpha2Code);
+        });
         break;
       }
       default: {
