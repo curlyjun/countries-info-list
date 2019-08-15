@@ -8,7 +8,6 @@ import { debounce } from '../../utils';
 const SearchBox = () => {
   const dispatch = useDispatch();
   const onChangeSearchInput = useCallback(text => {
-    console.log(text);
     dispatch({
       type: INTEGRATED_SEARCH_REQUEST,
       data: text,

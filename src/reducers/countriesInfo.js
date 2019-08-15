@@ -15,6 +15,8 @@ export const INTEGRATED_SEARCH_REQUEST = 'INTEGRATED_SEARCH_REQUEST';
 
 export const SORT_BY_COLUMN = 'SORT_BY_COLUMN';
 
+export const LOAD_MORE_ITEMS = 'LOAD_MORE_ITEMS';
+
 const initialState = {
   isLoadingCountriesInfo: false,
   isVisibleAddCountryForm: false,
@@ -23,6 +25,7 @@ const initialState = {
   sort: 0, // 0 : ascending, 1 : descending
   sortBy: 'name',
   error: '',
+  loadSize: 30,
 };
 
 export default (state = initialState, action) => {
@@ -40,7 +43,7 @@ export default (state = initialState, action) => {
           return countryInfo;
         });
         draft.isLoadingCountriesInfo = false;
-        draft.list = newData;
+        draft.list = newData.slice(draft.loadItems.length, 30);
         draft.loadItems = newData;
         break;
       }
@@ -89,7 +92,7 @@ export default (state = initialState, action) => {
           draft.sort = !draft.sort;
 
           draft.sort //descending
-            ? draft.list.sort((a, b) => {
+            ? draft.loadItems.sort((a, b) => {
                 if (a[draft.sortBy] > b[draft.sortBy]) {
                   return -1;
                 }
@@ -100,7 +103,7 @@ export default (state = initialState, action) => {
                 return 0;
               })
             : //ascending
-              draft.list.sort((a, b) => {
+              draft.loadItems.sort((a, b) => {
                 if (a[draft.sortBy] < b[draft.sortBy]) {
                   return -1;
                 }
@@ -114,7 +117,7 @@ export default (state = initialState, action) => {
           draft.sortBy = action.data;
           draft.sort = 0;
 
-          draft.list.sort((a, b) => {
+          draft.loadItems.sort((a, b) => {
             if (a[draft.sortBy] < b[draft.sortBy]) {
               return -1;
             }
@@ -125,7 +128,11 @@ export default (state = initialState, action) => {
             return 0;
           });
         }
-
+        draft.list = draft.loadItems.slice(0, draft.loadSize);
+        break;
+      }
+      case LOAD_MORE_ITEMS: {
+        draft.list = draft.list.concat(draft.loadItems.slice(draft.list.length, draft.list.length + draft.loadSize));
         break;
       }
       default: {

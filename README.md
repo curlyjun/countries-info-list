@@ -12,7 +12,7 @@
 - [x] Network 통신은 redux middleware를 통해 되어야 함.
 
 ## 추가 요구 사항
-- [ ] 일부만 로딩 후 스크롤 아래로 갈 시 추가 로딩
+- [x] 일부만 로딩 후 스크롤 아래로 갈 시 추가 로딩
 - [x] form 라이브러리(redux-form, formik 등) 사용
 - [ ] cross browsing 적용
 - [x] 검색 기능 (Rate limiting(debounce, throttle) 적용하여 타이핑 시 바로 검색)
