@@ -3,10 +3,12 @@ import { useDispatch } from 'react-redux';
 
 import SearchInput from '../components/SearchInput';
 import { INTEGRATED_SEARCH_REQUEST } from '../reducers/countriesInfo';
+import { debounce } from '../../utils';
 
 const SearchBox = () => {
   const dispatch = useDispatch();
   const onChangeSearchInput = useCallback(text => {
+    console.log(text);
     dispatch({
       type: INTEGRATED_SEARCH_REQUEST,
       data: text,
@@ -15,7 +17,7 @@ const SearchBox = () => {
   return (
     <>
       <span>통합 검색 : </span>
-      <SearchInput onChangeSearchInput={onChangeSearchInput} />
+      <SearchInput onChangeSearchInput={debounce(onChangeSearchInput, 300)} />
     </>
   );
 };
