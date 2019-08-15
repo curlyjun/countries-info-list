@@ -8,7 +8,6 @@ const Wrapper = styled.div`
   width: 800px;
   height: 100vh;
   margin: 0px auto;
-  background: rgba(255, 0, 0, 0.1);
 `;
 
 const App = () => {

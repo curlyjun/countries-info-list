@@ -13,10 +13,10 @@ const SearchBox = () => {
     });
   });
   return (
-    <div>
-      <p>통합 검색:</p>
+    <>
+      <span>통합 검색 : </span>
       <SearchInput onChangeSearchInput={onChangeSearchInput} />
-    </div>
+    </>
   );
 };
 

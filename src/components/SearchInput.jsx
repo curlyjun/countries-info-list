@@ -1,11 +1,17 @@
 import React from 'react';
 import { Input } from 'antd';
+import styled from 'styled-components';
+
+const SInput = styled(Input)`
+  width: 200px;
+  margin: 10px 20px;
+`;
 
 const SearchInput = ({ onChangeSearchInput }) => {
   const onChange = e => {
     onChangeSearchInput(e.target.value);
   };
-  return <Input placeholder="검색" onChange={onChange} />;
+  return <SInput placeholder="검색" onChange={onChange} />;
 };
 
 export default SearchInput;

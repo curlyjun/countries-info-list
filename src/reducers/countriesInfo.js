@@ -72,7 +72,13 @@ export default (state = initialState, action) => {
       case INTEGRATED_SEARCH_REQUEST: {
         const reg = new RegExp(action.data, 'ig');
         draft.list = draft.loadItems.filter(item => {
-          return reg.test(item.name) || reg.test(item.alpha2Code);
+          return (
+            reg.test(item.name) ||
+            reg.test(item.alpha2Code) ||
+            reg.test(item.region) ||
+            reg.test(item.capital) ||
+            reg.test(item.callingCodes)
+          );
         });
         break;
       }

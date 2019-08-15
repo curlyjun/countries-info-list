@@ -5,15 +5,26 @@ import SearchBox from '../containers/SearchBox';
 
 const MyHeader = styled.header`
   width: 100%;
-  height: 200px;
-  background: green;
+  margin: 20px auto;
+`;
+
+const HeaderContents = styled.div`
+  display: flex;
+  justify-content: space-between;
 `;
 
 const Header = () => {
   return (
     <MyHeader>
-      <SearchBox />
-      <AddCountryButton />
+      <h1 style={{ textAlign: 'center' }}>Countries Info List</h1>
+      <HeaderContents>
+        <div>
+          <SearchBox />
+        </div>
+        <div>
+          <AddCountryButton />
+        </div>
+      </HeaderContents>
     </MyHeader>
   );
 };

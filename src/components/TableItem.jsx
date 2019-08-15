@@ -1,7 +1,11 @@
-import React from 'react';
-import { Tag } from 'antd';
+import React, { useCallback } from 'react';
+import { Tag, Button } from 'antd';
 
 const TableItem = ({ data, onClickDelete }) => {
+  const onClick = useCallback(() => {
+    onClickDelete(data.key);
+  }, []);
+
   return (
     <tr>
       <td>{data.name}</td>
@@ -14,7 +18,7 @@ const TableItem = ({ data, onClickDelete }) => {
       <td>{data.capital}</td>
       <td>{data.alpha2Code}</td>
       <td>
-        <button onClick={() => onClickDelete(data.key)}>삭제</button>
+        <Button onClick={onClick} type="danger" icon="delete" shape="circle" />
       </td>
     </tr>
   );
