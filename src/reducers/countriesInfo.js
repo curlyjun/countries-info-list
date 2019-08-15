@@ -9,6 +9,8 @@ export const CLOSE_ADD_COUNTRY_MODAL = 'CLOSE_ADD_COUNTRY_MODAL';
 
 export const ADD_COUNTRY_REQUEST = 'ADD_COUNTRY_REQUEST';
 
+export const DELETE_COUNTRY_REQUEST = 'DELETE_COUNTRY_REQUEST';
+
 const initialState = {
   isLoadingCountriesInfo: false,
   isVisibleAddCountryForm: false,
@@ -50,6 +52,10 @@ export default (state = initialState, action) => {
       case ADD_COUNTRY_REQUEST: {
         action.data.key = draft.list.length + 1;
         draft.list.unshift(action.data);
+        break;
+      }
+      case DELETE_COUNTRY_REQUEST: {
+        draft.list = draft.list.filter(item => item.key !== action.data);
         break;
       }
       default: {

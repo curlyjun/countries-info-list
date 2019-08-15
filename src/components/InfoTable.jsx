@@ -1,14 +1,16 @@
 import React, { useCallback } from 'react';
 import styled from 'styled-components';
 
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import TableItem from './TableItem';
+import { DELETE_COUNTRY_REQUEST } from '../reducers/countriesInfo';
 
 const MyTable = styled.table`
   width: 100%;
 `;
 
 const InfoTable = () => {
+  const dispatch = useDispatch();
   const { list, isLoadingCountriesInfo } = useSelector(state => state.countriesInfo);
 
   const onClickTableHeader = useCallback(e => {
@@ -16,7 +18,10 @@ const InfoTable = () => {
   }, []);
 
   const onClickDelete = useCallback(key => {
-    console.log(key);
+    dispatch({
+      type: DELETE_COUNTRY_REQUEST,
+      data: key,
+    });
   }, []);
   return (
     <>
