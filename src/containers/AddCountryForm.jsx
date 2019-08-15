@@ -1,11 +1,11 @@
 import React, { useCallback, useState } from 'react';
 import { Form, Input, Icon, Button } from 'antd';
 import { useDispatch } from 'react-redux';
-import { ADD_COUNTRY_REQUEST, CLOSE_ADD_COUNTRY_MODAL } from '../reducers/countriesInfo';
+
+import { ADD_COUNTRY_REQUEST, CLOSE_ADD_COUNTRY_MODAL } from '../reducers';
 
 const AddCountryForm = ({ form }) => {
   const dispatch = useDispatch();
-  // const {} = useSelector(state => state.countriesInfo);
   const [id, setId] = useState(0);
 
   // 국가 전화번호 추가

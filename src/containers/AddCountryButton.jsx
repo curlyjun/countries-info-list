@@ -1,7 +1,8 @@
 import React, { useCallback } from 'react';
 import { Button } from 'antd';
 import { useDispatch } from 'react-redux';
-import { OPEN_ADD_COUNTRY_MODAL } from '../reducers/countriesInfo';
+
+import { OPEN_ADD_COUNTRY_MODAL } from '../reducers';
 
 const AddCountryButton = () => {
   const dispatch = useDispatch();

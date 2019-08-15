@@ -1,10 +1,10 @@
 import React, { useCallback, useRef } from 'react';
 import styled from 'styled-components';
-
-import { useSelector, useDispatch } from 'react-redux';
-import TableItem from '../components/TableItem';
-import { DELETE_COUNTRY_REQUEST, SORT_BY_COLUMN, LOAD_MORE_ITEMS } from '../reducers/countriesInfo';
 import { Icon, Spin } from 'antd';
+import { useSelector, useDispatch } from 'react-redux';
+
+import { TableItem } from '../components';
+import { DELETE_COUNTRY_REQUEST, SORT_BY_COLUMN, LOAD_MORE_ITEMS } from '../reducers';
 
 const TableContainer = styled.div`
   height: 600px;
@@ -34,7 +34,7 @@ const TableContainer = styled.div`
 
 const InfoTable = () => {
   const dispatch = useDispatch();
-  const { list, sortBy, sort, isLoadingCountriesInfo } = useSelector(state => state.countriesInfo);
+  const { list, sortBy, sort, isLoadingCountriesInfo } = useSelector(state => state);
   const tb = useRef();
 
   const onClickTableHeader = useCallback(e => {
@@ -51,6 +51,7 @@ const InfoTable = () => {
       data: key,
     });
   }, []);
+
   const onScroll = useCallback(
     e => {
       let scrollHeight = Math.max(e.target.scrollHeight, document.body.scrollHeight);
@@ -94,16 +95,14 @@ const InfoTable = () => {
                 {sortBy === 'capital' ? sort ? <Icon type="sort-descending" /> : <Icon type="sort-ascending" /> : null}
               </th>
               <th style={{ width: '12.5%' }} onClick={onClickTableHeader} id="alpha2Code">
-                <span>
-                  코드
-                  {sortBy === 'alpha2Code' ? (
-                    sort ? (
-                      <Icon type="sort-descending" />
-                    ) : (
-                      <Icon type="sort-ascending" />
-                    )
-                  ) : null}
-                </span>
+                코드
+                {sortBy === 'alpha2Code' ? (
+                  sort ? (
+                    <Icon type="sort-descending" />
+                  ) : (
+                    <Icon type="sort-ascending" />
+                  )
+                ) : null}
               </th>
               <th />
             </tr>

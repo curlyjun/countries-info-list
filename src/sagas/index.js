@@ -1,10 +1,6 @@
 import axios from 'axios';
 import { takeLatest, put, call, fork } from 'redux-saga/effects';
-import {
-  LOAD_COUNTRIES_INFO_REQUEST,
-  LOAD_COUNTRIES_INFO_SUCCESS,
-  LOAD_COUNTRIES_INFO_FAILURE,
-} from '../reducers/countriesInfo';
+import { LOAD_COUNTRIES_INFO_REQUEST, LOAD_COUNTRIES_INFO_SUCCESS, LOAD_COUNTRIES_INFO_FAILURE } from '../reducers';
 
 axios.defaults.baseURL = 'https://restcountries.eu/rest/v2/all?fields=alpha2Code;capital;name;region;callingCodes';
 
@@ -20,7 +16,7 @@ function* loadCountriesInfo() {
       data: result.data,
     });
   } catch (e) {
-    console.log(e);
+    console.error(e);
     yield put({
       type: LOAD_COUNTRIES_INFO_FAILURE,
       error: e,

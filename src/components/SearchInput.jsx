@@ -9,7 +9,6 @@ const SInput = styled(Input)`
 
 const SearchInput = ({ onChangeSearchInput }) => {
   const onChange = e => {
-    console.log(e.target.value);
     onChangeSearchInput(e.target.value);
   };
   return <SInput placeholder="검색" onChange={onChange} />;

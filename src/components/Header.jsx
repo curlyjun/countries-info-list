@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
-import AddCountryButton from '../containers/AddCountryButton';
-import SearchBox from '../containers/SearchBox';
+
+import { AddCountryButton, SearchBox } from '../containers';
 
 const MyHeader = styled.header`
   width: 100%;

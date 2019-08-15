@@ -1,8 +1,8 @@
 import React, { useCallback } from 'react';
 import { useDispatch } from 'react-redux';
 
-import SearchInput from '../components/SearchInput';
-import { INTEGRATED_SEARCH_REQUEST } from '../reducers/countriesInfo';
+import { SearchInput } from '../components';
+import { INTEGRATED_SEARCH_REQUEST } from '../reducers';
 import { debounce } from '../../utils';
 
 const SearchBox = () => {

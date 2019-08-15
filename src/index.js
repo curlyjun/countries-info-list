@@ -9,7 +9,7 @@ import { createStore, applyMiddleware } from 'redux';
 import createSagaMiddleware from 'redux-saga';
 import { composeWithDevTools } from 'redux-devtools-extension';
 
-import App from './components/App';
+import { App } from './components';
 
 import rootReducer from './reducers';
 import rootSaga from './sagas';

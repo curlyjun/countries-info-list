@@ -1,12 +1,13 @@
 import React, { useCallback } from 'react';
-import { Modal, Form } from 'antd';
+import { Modal } from 'antd';
 import { useSelector, useDispatch } from 'react-redux';
-import { CLOSE_ADD_COUNTRY_MODAL } from '../reducers/countriesInfo';
+
+import { CLOSE_ADD_COUNTRY_MODAL } from '../reducers';
 import AddCountryForm from './AddCountryForm';
 
 const AddCountryModal = () => {
   const dispatch = useDispatch();
-  const { isVisibleAddCountryForm } = useSelector(state => state.countriesInfo);
+  const { isVisibleAddCountryForm } = useSelector(state => state);
 
   const onCancel = useCallback(() => {
     dispatch({
